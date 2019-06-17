@@ -59,6 +59,7 @@ const pageItemCount = 10;
       If both expressions are true then true.
       if (i >= lowerLimitOfPage && i <= upperLimitOfPage)
 */
+
 const showPage = (list, page) => {
    let lowerLimitOfPage = (page-1) * pageItemCount;
    let upperLimitOfPage = (page * pageItemCount) - 1;
