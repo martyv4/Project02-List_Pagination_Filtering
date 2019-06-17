@@ -5,7 +5,6 @@ FSJS project 2 - List Filter and Pagination
 
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
-
 /*
  Two Global constant variables
   1) studentList:
@@ -35,14 +34,14 @@ const pageItemCount = 10;
          we visit each element of list only once.
       - The lowerLimitOfPage will calculate the lowest index of the item to display on the page
          - The upperLimitOfPage will calculate the largest index of the item to display on the page
-         n persons, 10 items per page
-            page 1 -> 0,1,2,3,4,5,6,7,8,9 -- display
-            everything else   --hide
-            page 2 -> 10,11,12,13,14,15,16,17,18,19  --show
-            everything else --hide
-            page 3 -> 20,21,22,23,24,25,26,27,28,29  --show
-            everything else --hide
-            and so on...
+         - n persons, 10 items per page
+               page 1 -> 0,1,2,3,4,5,6,7,8,9 -- display
+               everything else   --hide
+               page 2 -> 10,11,12,13,14,15,16,17,18,19  --show
+               everything else --hide
+               page 3 -> 20,21,22,23,24,25,26,27,28,29  --show
+               everything else --hide
+               and so on...
          Determine formula for upper and lower in each possible page:
          -  lowerLimitOfPage = (page - 1) * pageIemCount
          -  we take the total page count and multiply it by page number minus one
