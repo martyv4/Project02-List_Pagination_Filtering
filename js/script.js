@@ -5,8 +5,7 @@ FSJS project 2 - List Filter and Pagination
 
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
-/*
- Two Global constant variables
+/*Two Global constant variables
   1) studentList:
      Get the studemt-list from the html page (DOM element). With this
      querySelector I am looking for any tag with the class name of student-list
@@ -19,8 +18,7 @@ FSJS project 2 - List Filter and Pagination
 const studentList = document.querySelector('.student-list').children;
 const pageItemCount = 10;
 
-/* Two Functions
-   1) showPage
+/* Function:  showPage
       - This arrow function will take the list of all students and show a particular page.
       - List and page are the two parameters for the showPage function.
 
@@ -59,18 +57,74 @@ const pageItemCount = 10;
       If both expressions are true then true.
       if (i >= lowerLimitOfPage && i <= upperLimitOfPage)
 */
+ const showPage = (list, page) => {
+    let lowerLimitOfPage = (page-1) * pageItemCount;
+    let upperLimitOfPage = (page * pageItemCount) - 1;
 
-const showPage = (list, page) => {
-   let lowerLimitOfPage = (page-1) * pageItemCount;
-   let upperLimitOfPage = (page * pageItemCount) - 1;
+    for (let i = 0; i < list.length; i += 1) {
+        let li = list[i];
+        if (i >= lowerLimitOfPage && i <= upperLimitOfPage) {
+            li.style.display = ''; //display
+        } else {
+            li.style.display = 'none'; //hide
+        }
+    }
+}
 
-   for (let i = 0; i < list.length; i += 1) {
-       let li = list[i];
-       if (i >= lowerLimitOfPage && i <= upperLimitOfPage) {
-           li.style.display = ''; //display
-       } else {
-           li.style.display = 'none'; //hide
-       }
-      }
-   }
+/***
+   2) Function:  const appendPageLinks
+    - Create the `appendPageLinks function` to generate, append, and add
+      functionality to the pagination buttons.
+    Variables
+      var numPages = Math.ceil(list.length/pageItemCount);
+         - total page count = items in list / items per page
+         - then round the number up to the nearest whole number
+      const pageDiv = document.querySelector('.page');
+         - the query selector gets the first element found in the DOM wth class page
+      const paginatorDiv = document.createElement('div');
+      -  create an element of tag div
+      paginatorDiv.setAttribute('class', 'pagination');
+      - set attribute 'class' to pagination
+      pageDiv.appendChild(paginatorDiv);
+      - we are appending the paginatorDiv element to the pageDiv
+      const ul = document.createElement('ul');
+      - we will create a ul element
+      paginatorDiv.appendChild(ul);
+      - we are appending the ul element to the paginatorDiv
+
+      divide list.length by pageItemCount, round up for total pages needed
+    */
+   const appendPageLinks = (list) => {
+    var numPages = Math.ceil(list.length/pageItemCount);
+    const pageDiv = document.querySelector('.page');
+    const paginatorDiv = document.createElement('div');
+
+    paginatorDiv.setAttribute('class', 'pagination');
+    pageDiv.appendChild(paginatorDiv);
+
+    const ul = document.createElement('ul');
+
+    paginatorDiv.appendChild(ul);
+
+    for (let i = 1; i<= numPages; i+= 1)
+    {
+    let li = document.createElement('li');
+    let newLink = document.createElement('a');
+
+    newLink.innerText = i;
+    li.appendChild(newLink);
+    ul.appendChild(li);
+
+    newLink.addEventListener("click",function() {showPage(studentList,i)});
+
+    //event listener
+
+  }
+}
+
+//show the first page when the HTML loads
 showPage(studentList, 1);
+appendPageLinks(studentList);
+
+
+// Remember to delete the comments that came with this file, and replace them with your own code comments.
