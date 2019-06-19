@@ -67,7 +67,7 @@ const pageItemCount = 10;
     let upperLimitOfPage = (page * pageItemCount) - 1;
 
     for (let i = 0; i < list.length; i += 1) {
-        let li = list[i];
+       let li = list[i];
         if (i >= lowerLimitOfPage && i <= upperLimitOfPage) {
             li.style.display = ''; //display
         } else {
@@ -77,10 +77,10 @@ const pageItemCount = 10;
 }
 
 /***
-   2) Function:  const appendPageLinks
-    - Create the `appendPageLinks function` to generate, append, and add
+   2) Function:  appendPageLinks
+    - Create the 'appendPageLinks function' to generate, append, and add
       functionality to the pagination buttons.
-      Variables
+      VARIABLE
          var numPages = Math.ceil(list.length/pageItemCount);
             - total page count = items in list / items per page
             - then round the number up to the nearest whole number
