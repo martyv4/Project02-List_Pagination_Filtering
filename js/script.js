@@ -24,6 +24,8 @@ const pageItemCount = 10;
 
       The for loop iterates through each item in list by moving through its indexes.
       - let i = 0
+         We declare a variable i set to 0 (the first index of the list).
+      - i < list.length
          The for loop will end when i is equal to the length of the list
       - i += 1
          With each iteration add 1 to i (stepping through each index)
