@@ -63,8 +63,9 @@ const pageItemCount = 10;
       if (i >= lowerLimitOfPage && i <= upperLimitOfPage)
 */
  const showPage = (list, page) => {
-    let lowerLimitOfPage = (page-1) * pageItemCount;
+
     let upperLimitOfPage = (page * pageItemCount) - 1;
+    let lowerLimitOfPage = (page-1) * pageItemCount;
 
     for (let i = 0; i < list.length; i += 1) {
        let li = list[i];
@@ -111,16 +112,17 @@ const pageItemCount = 10;
 
     paginatorDiv.appendChild(ul);
 
-    for (let i = 1; i<= numPages; i+= 1)
+   for (let i = 1; i<= numPages; i+= 1)
     {
     let li = document.createElement('li');
     let newLink = document.createElement('a');
+    li.appendChild(newLink);
+      ul.appendChild(li);
 
     newLink.setAttribute('class', 'paginationLink');
 
     newLink.innerText = i;
-    li.appendChild(newLink);
-    ul.appendChild(li);
+
 
     newLink.addEventListener("click",(e) => {
       showPage(studentList,i);
@@ -138,10 +140,50 @@ const pageItemCount = 10;
      });
   }
 }
+const appendSearch = () => {
+   let pageHeader = document.querySelector('.page-header');
+   let studentSearch = document.createElement('div');
+   let searchBox = document.createElement('input');
+   let searchButton = document.createElement('button');
+
+   searchButton.textContent = 'Search';
+   searchBox.setAttribute('placeholder', 'Search for students...');
+   studentSearch.setAttribute('class', 'student-search');
+
+   studentSearch.appendChild(searchBox);
+   studentSearch.appendChild(searchButton);
+   pageHeader.appendChild(studentSearch);
+
+   searchButton.addEventListener("click",() => {
+   runSearch (searchBox.value);
+   });
+
+   searchBox.addEventListener("keyup",() => {
+     runSearch (searchBox.value);
+     });
+ }
+
+ const runSearch = (inputValue) => {
+   for (let i = 0; i < studentList.length; i +=1) {
+     let li = studentList[i];
+     let div = li.querySelector('.student-details');
+     let nameTag = div.getElementsByTagName('h3')[0];
+     let name = nameTag.innerText;
+
+     if (name.includes(inputValue)) {
+         li.style.display = ''; //display
+     } else {
+         li.style.display = 'none'; //hide
+     }
+ }
+ }
+
 
 //show the first page when the HTML loads
 showPage(studentList, 1);
 appendPageLinks(studentList);
+appendSearch();
+
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
